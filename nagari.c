@@ -25,7 +25,57 @@ NAGSTR *nstring(const char *str)
     return ptr->next->str;
 }
 
-NAGSTR *nconcat(char *s1, char *s2);
+NAGSTR *nconcat(char *s1, char *s2)
+{
+    NAGSTR *tmp;
+    char *raw_str;
+
+    raw_str = (char *)malloc(sizeof(char) 
+        * (strlen(s1) + strlen(s2) + 1));
+
+    strcat(raw_str, s1);
+    strcat(raw_str, s2);
+
+    tmp = nstring((const char *)raw_str);
+
+    return tmp;
+}
+
+// Can we, and should we get rid off the int num?
+NAGSTR *njoin(int num, ...)
+{
+    NAGSTR *tmp;
+    char *raw_str;
+    int tlen = 0;
+
+    va_list largs;
+    va_start(largs, num);
+
+    // Get total string length
+    for (int i = 0; i < num; i++)
+    {
+        char *s = va_arg(largs, char *);
+        tlen += strlen(s);
+    }
+
+    va_end(largs);
+
+    raw_str = (char *)malloc(sizeof(char) * tlen);
+
+    // Join all string args
+    va_start(largs, num);
+    for (int i = 0; i < num; i++)
+    {
+        char *s = va_arg(largs, char *);
+        strcat(raw_str, s);
+    }
+    va_end(largs);
+
+    tmp = nstring((const char *)raw_str);
+
+    return tmp;
+}
+
 int ncontains(char *s1, char *s2);
 int nends_width(char *s1, char *s2);
 int nequals(char *s1, char *s2);

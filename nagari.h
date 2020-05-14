@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 struct t_nagari_string {
     char *val;
@@ -27,6 +28,7 @@ void ncleanup();
 // EVERY METHOD MUST TREAT STRINGS AS IMMUATABLE
 NAGSTR *nstring(const char *str);
 NAGSTR *nconcat(char *s1, char *s2);
+NAGSTR *njoin(int num, ...);
 int ncontains(char *s1, char *s2);
 int nends_width(char *s1, char *s2);
 int nequals(char *s1, char *s2);
