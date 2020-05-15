@@ -45,7 +45,7 @@ int nlast_index_of(char *s1, char *s2);
 int nlength(char *s1);
 NAGSTR *nremove(char *s1, int i);
 NAGSTR *nsplit(char *s1, char *s2);
-int nstarts_with(char *s1, char *s);
+NBOOL nstarts_with(char *s1, char *s2);
 NAGSTR *nsubstring(char s1, int si, int ei);
 NAGSTR *ntrim(char *s1);
 

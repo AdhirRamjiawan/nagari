@@ -35,6 +35,16 @@ int main(void)
     printf("position of 'lo' in 'hello world!': %d\n", position_valid);
     printf("position of 'mars' in 'hello world!': %d\n", position_invalid);
 
+    int len = nlength("hello world!");
+
+    printf("Length of 'hello world!': %d\n", len);
+
+    NBOOL starts_with_result_valid  = nstarts_with(helloworld->val, "hello");
+    NBOOL starts_with_result_invalid  = nstarts_with(helloworld->val, "ello");
+
+    printf(" 'hello world' starts with 'hello': %d\n", starts_with_result_valid);
+    printf(" 'hello world' starts with 'ello': %d\n", starts_with_result_invalid);
+
     ncleanup();
     return 0;
 }

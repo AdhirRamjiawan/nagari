@@ -113,10 +113,39 @@ NAGSTR *nto_lower(char *s1);
 NAGSTR *nto_upper(char *s1);
 NAGSTR *ninsert(char s1, char *s2);
 int nlast_index_of(char *s1, char *s2);
-int nlength(char *s1);
+
+int nlength(char *s1)
+{
+    int len = 0;
+
+    len = strlen(s1);
+
+    return len;
+}
+
 NAGSTR *nremove(char *s1, int i);
 NAGSTR *nsplit(char *s1, char *s2);
-int nstarts_with(char *s1, char *s);
+
+NBOOL nstarts_with(char *s1, char *s2)
+{
+    NBOOL result = NFALSE;
+    int len = strlen(s1);
+    int len2 = strlen(s2);
+    int count = 0;
+
+    while (*s1 == *s2)
+    {
+        s1++;
+        s2++;
+        count++;
+    }
+
+    if (count >= len2)
+        result = NTRUE;
+
+    return result; 
+}
+
 NAGSTR *nsubstring(char s1, int si, int ei);
 NAGSTR *ntrim(char *s1);
 
