@@ -76,10 +76,39 @@ NAGSTR *njoin(int num, ...)
     return tmp;
 }
 
-int ncontains(char *s1, char *s2);
-int nends_width(char *s1, char *s2);
-int nequals(char *s1, char *s2);
-int nindex_of(char *s1, char *s2);
+NBOOL ncontains(char *s1, char *s2)
+{
+    NBOOL result = NFALSE;
+
+    if (strstr(s1, s2) != NULL)
+        result = NTRUE;
+
+    return result;
+}
+
+NBOOL nends_width(char *s1, char *s2);
+
+NBOOL nequals(char *s1, char *s2)
+{
+    NBOOL result = NFALSE;
+
+    if (strcmp(s1, s2) == 0)
+        result = NTRUE;
+
+    return result;
+}
+
+int nindex_of(char *s1, char *s2)
+{
+    int index = -1;
+    char *ptr = strstr(s1, s2); 
+
+    if (ptr  != NULL)
+        index = ptr - s1;
+
+    return index;
+}
+
 NAGSTR *nto_lower(char *s1);
 NAGSTR *nto_upper(char *s1);
 NAGSTR *ninsert(char s1, char *s2);

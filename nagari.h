@@ -6,6 +6,9 @@
 #include <string.h>
 #include <stdarg.h>
 
+#define NTRUE   1
+#define NFALSE  0
+
 struct t_nagari_string {
     char *val;
 };
@@ -18,6 +21,8 @@ struct t_nagari_bank_string {
     struct t_nagari_bank_string *prev;
 };
 
+typedef int NBOOL;
+
 // TODO: make bank thread safe
 struct t_nagari_bank_string NAGBANK;
 struct t_nagari_bank_string *NAGBANK_PTR;
@@ -29,9 +34,9 @@ void ncleanup();
 NAGSTR *nstring(const char *str);
 NAGSTR *nconcat(char *s1, char *s2);
 NAGSTR *njoin(int num, ...);
-int ncontains(char *s1, char *s2);
-int nends_width(char *s1, char *s2);
-int nequals(char *s1, char *s2);
+NBOOL ncontains(char *s1, char *s2);
+NBOOL nends_width(char *s1, char *s2);
+NBOOL nequals(char *s1, char *s2);
 int nindex_of(char *s1, char *s2);
 NAGSTR *nto_lower(char *s1);
 NAGSTR *nto_upper(char *s1);
