@@ -118,6 +118,11 @@ NAGSTR *nto_lower(char *s1)
 
     strcpy(raw_str, s1);
 
+    /* if current char is within CAPS
+     * range on ascii table then 
+     * add 32 to it to shift it to the 
+     * lower char equivalent on the
+     * ascii table.  */
     for (int i = 0; i < len; i++)
     {
         int d = *raw_str;
