@@ -139,7 +139,36 @@ NAGSTR *nto_lower(char *s1)
     return tmp;
 }
 
-NAGSTR *nto_upper(char *s1);
+NAGSTR *nto_upper(char *s1)
+{
+    NAGSTR *tmp;
+    int len = strlen(s1);
+    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *ptr = raw_str;
+
+    strcpy(raw_str, s1);
+
+    /* if current char is within lower char
+     * range on ascii table then subtract 
+     * 32 from it to shift it to the 
+     * upper char equivalent on the
+     * ascii table.  */
+    for (int i = 0; i < len; i++)
+    {
+        int d = *raw_str;
+
+        if (d >= ASCII_LOW_START && d <= ASCII_LOW_END)
+            *raw_str = d - ASCII_CAPS_LOW_DIST;
+
+        raw_str++;
+    }
+
+    raw_str = ptr;
+    tmp = nstring((const char *)raw_str);
+
+    return tmp;
+}
+
 NAGSTR *ninsert(char s1, char *s2);
 int nlast_index_of(char *s1, char *s2);
 
