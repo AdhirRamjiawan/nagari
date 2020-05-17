@@ -9,6 +9,14 @@
 #define NTRUE   1
 #define NFALSE  0
 
+#define ASCII_CAPS_START    65
+#define ASCII_CAPS_END      90
+
+#define ASCII_LOW_START    97
+#define ASCII_LOW_END      122
+
+#define ASCII_CAPS_LOW_DIST 32
+
 struct t_nagari_string {
     char *val;
 };

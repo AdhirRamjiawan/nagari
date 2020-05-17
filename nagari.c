@@ -109,7 +109,31 @@ int nindex_of(char *s1, char *s2)
     return index;
 }
 
-NAGSTR *nto_lower(char *s1);
+NAGSTR *nto_lower(char *s1)
+{
+    NAGSTR *tmp;
+    int len = strlen(s1);
+    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *ptr = raw_str;
+
+    strcpy(raw_str, s1);
+
+    for (int i = 0; i < len; i++)
+    {
+        int d = *raw_str;
+
+        if (d >= ASCII_CAPS_START && d <= ASCII_CAPS_END)
+            *raw_str = d + ASCII_CAPS_LOW_DIST;
+
+        raw_str++;
+    }
+
+    raw_str = ptr;
+    tmp = nstring((const char *)raw_str);
+
+    return tmp;
+}
+
 NAGSTR *nto_upper(char *s1);
 NAGSTR *ninsert(char s1, char *s2);
 int nlast_index_of(char *s1, char *s2);

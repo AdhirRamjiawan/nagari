@@ -45,6 +45,8 @@ int main(void)
     printf(" 'hello world' starts with 'hello': %d\n", starts_with_result_valid);
     printf(" 'hello world' starts with 'ello': %d\n", starts_with_result_invalid);
 
+    printf("lower case of 'HELLO WORld!' is: %s\n", nto_lower("HELLO WORld!")->val);
+
     ncleanup();
     return 0;
 }
