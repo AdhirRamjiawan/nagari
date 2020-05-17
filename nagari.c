@@ -132,6 +132,7 @@ NBOOL nstarts_with(char *s1, char *s2)
     int len = strlen(s1);
     int len2 = strlen(s2);
     int count = 0;
+    
 
     while (*s1 == *s2)
     {
@@ -146,7 +147,21 @@ NBOOL nstarts_with(char *s1, char *s2)
     return result; 
 }
 
-NAGSTR *nsubstring(char s1, int si, int ei);
+NAGSTR *nsubstring(char *s1, int si, int ei)
+{
+    NAGSTR *sub_str;
+    char *raw_str;
+
+    int len = strlen(s1);
+
+    for (int i=0; i <= si; i++)
+        s1++;
+
+    
+
+    return sub_str;
+}
+
 NAGSTR *ntrim(char *s1);
 
 void ninit()
