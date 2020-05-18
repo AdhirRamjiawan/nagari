@@ -197,6 +197,8 @@ NAGSTR *nremove(char *s1, int i)
     raw_str = ptr;
 
     result = nstring(raw_str);
+    free(raw_str);
+    free(ptr);
 
     return result;
 }
