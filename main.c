@@ -50,6 +50,8 @@ int main(void)
 
     printf("remove from index 9 from 'Hello world!': %s \n", nremove("Hello world!", 9)->val);
 
+    printf("The substring from 3 to 7 of 'Hello world!' is: %s\n", nsubstring("Hello world!", 3, 7)->val);
+
     ncleanup();
     return 0;
 }

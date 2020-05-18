@@ -247,14 +247,22 @@ NBOOL nstarts_with(char *s1, char *s2)
 NAGSTR *nsubstring(char *s1, int si, int ei)
 {
     NAGSTR *sub_str;
-    char *raw_str;
+    char *raw_str = (char *)malloc(sizeof(char) *  (ei - si));
+    char *ptr_raw = raw_str;
+    char *ptr = s1;
 
-    int len = _nlen(s1);
-
-    for (int i=0; i <= si; i++)
+    for (int i=0; i < si; i++)
         s1++;
 
-    
+    for (int i = si; i <= ei; i++)
+        *raw_str++ = *s1++;
+
+    *raw_str = '\0';
+
+    s1 = ptr;
+    raw_str = ptr_raw;
+
+    sub_str = nstring(raw_str);
 
     return sub_str;
 }
