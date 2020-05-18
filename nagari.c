@@ -20,7 +20,7 @@ NAGSTR *nstring(const char *str)
     ptr->next->str->val = (char *)malloc(sizeof(char) * _nlen(str));
     ptr->next->prev = ptr;
 
-    strcpy(ptr->next->str->val, str);
+    _ncopy(ptr->next->str->val, (char *)str);
 
     return ptr->next->str;
 }
