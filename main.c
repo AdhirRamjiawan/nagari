@@ -11,7 +11,7 @@ int main(void)
             "fox", " ", "jumps", " ", "over", " ", 
             "lazy", " ", "dog");
 
-   /* nprint(hello);
+    nprint(hello);
     nprint(space);
     nprintln(world);
 
@@ -51,7 +51,7 @@ int main(void)
     printf("remove from index 9 from 'Hello world!': %s \n", nremove("Hello world!", 9)->val);
 
     printf("The substring from 3 to 7 of 'Hello world!' is: %s\n", nsubstring("Hello world!", 3, 7)->val);
-*/
+
     printf("Having '   Hello  ' trimmed is: '%s'\n", ntrim("   Hello  ")->val);
     ncleanup();
     return 0;
