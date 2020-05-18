@@ -31,12 +31,12 @@ NAGSTR *nconcat(char *s1, char *s2)
     char *raw_str;
 
     raw_str = (char *)malloc(sizeof(char) 
-        * (strlen(s1) + strlen(s2) + 1));
+        * (strlen(s1) + strlen(s2)));
 
     strcat(raw_str, s1);
     strcat(raw_str, s2);
 
-    tmp = nstring((const char *)raw_str);
+    tmp = nstring(raw_str);
 
     return tmp;
 }
