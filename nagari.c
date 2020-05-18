@@ -65,7 +65,7 @@ NAGSTR *nconcat(char *s1, char *s2)
     int len = _nlen(s1);
     int len2 = _nlen(s2);
     
-    raw_str = (char *)malloc(sizeof(char) * (len + len2));
+    raw_str = _nmalloc(len + len2);
 
     ptr = raw_str;
 
@@ -101,7 +101,7 @@ NAGSTR *njoin(int num, ...)
 
     va_end(largs);
 
-    raw_str = (char *)malloc(sizeof(char) * tlen);
+    raw_str = _nmalloc(tlen);
 
     // Join all string args
     va_start(largs, num);
@@ -154,7 +154,7 @@ NAGSTR *nto_lower(char *s1)
 {
     NAGSTR *tmp;
     int len = _nlen(s1);
-    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
     strcpy(raw_str, s1);
@@ -184,7 +184,7 @@ NAGSTR *nto_upper(char *s1)
 {
     NAGSTR *tmp;
     int len = _nlen(s1);
-    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
     strcpy(raw_str, s1);
@@ -222,7 +222,7 @@ NAGSTR *nremove(char *s1, int i)
 {
     NAGSTR *result;
     int len = _nlen(s1);
-    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
     strcpy(raw_str, s1);
@@ -246,7 +246,6 @@ NBOOL nstarts_with(char *s1, char *s2)
     int len = _nlen(s1);
     int len2 = _nlen(s2);
     int count = 0;
-    
 
     while (*s1 == *s2)
     {
@@ -264,7 +263,7 @@ NBOOL nstarts_with(char *s1, char *s2)
 NAGSTR *nsubstring(char *s1, int si, int ei)
 {
     NAGSTR *sub_str;
-    char *raw_str = (char *)malloc(sizeof(char) *  (ei - si));
+    char *raw_str = _nmalloc(ei - si);
     char *ptr_raw = raw_str;
     char *ptr = s1;
 
