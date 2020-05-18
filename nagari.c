@@ -40,7 +40,7 @@ int _nlen(const char *str)
     return result;
 }
 
-char *_nmalloc(int len)
+inline char *_nmalloc(int len)
 {
     return (char *)malloc(sizeof(char) * len);
 }
