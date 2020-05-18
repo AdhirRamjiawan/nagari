@@ -39,6 +39,7 @@ void ninit();
 void ncleanup();
 
 // EVERY METHOD MUST TREAT STRINGS AS IMMUATABLE
+int _nlen(const char *str);
 NAGSTR *nstring(const char *str);
 NAGSTR *nconcat(char *s1, char *s2);
 NAGSTR *njoin(int num, ...);

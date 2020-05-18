@@ -39,8 +39,8 @@ int main(void)
 
     printf("Length of 'hello world!': %d\n", len);
 
-    NBOOL starts_with_result_valid  = nstarts_with(helloworld->val, "hello");
-    NBOOL starts_with_result_invalid  = nstarts_with(helloworld->val, "ello");
+    NBOOL starts_with_result_valid  = nstarts_with("helloworld", "hello");
+    NBOOL starts_with_result_invalid  = nstarts_with("helloworld", "ello");
 
     printf(" 'hello world' starts with 'hello': %d\n", starts_with_result_valid);
     printf(" 'hello world' starts with 'ello': %d\n", starts_with_result_invalid);

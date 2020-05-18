@@ -17,7 +17,7 @@ NAGSTR *nstring(const char *str)
         malloc(sizeof(struct t_nagari_bank_string));
 
     ptr->next->str = (NAGSTR *)malloc(sizeof(NAGSTR));
-    ptr->next->str->val = (char *)malloc(sizeof(char) * strlen(str));
+    ptr->next->str->val = (char *)malloc(sizeof(char) * _nlen(str));
     ptr->next->prev = ptr;
 
     strcpy(ptr->next->str->val, str);
@@ -25,19 +25,43 @@ NAGSTR *nstring(const char *str)
     return ptr->next->str;
 }
 
+/* Only works with \0 terminated strings. */
+int _nlen(const char *str)
+{
+    int result = 0;
+    char *ptr = (char *)str;
+
+    while(*str != '\0')
+        str++;
+
+    result = str - ptr;
+    str = ptr;
+
+    return result;
+}
+
 NAGSTR *nconcat(char *s1, char *s2)
 {
     NAGSTR *tmp;
     char *raw_str;
+    char *ptr;
+    int len = _nlen(s1);
+    int len2 = _nlen(s2);
+    
+    raw_str = (char *)malloc(sizeof(char) * (len + len2));
 
-    raw_str = (char *)malloc(sizeof(char) 
-        * (strlen(s1) + strlen(s2)));
+    ptr = raw_str;
 
-    strcat(raw_str, s1);
-    strcat(raw_str, s2);
+    for (int i = 0; i < len; i++)
+        *raw_str++ = *s1++;
+
+    for (int i = len2; i < len + len2; i++)
+        *raw_str++ = *s2++;
+
+    raw_str = ptr;
 
     tmp = nstring(raw_str);
-
+    
     return tmp;
 }
 
@@ -55,7 +79,7 @@ NAGSTR *njoin(int num, ...)
     for (int i = 0; i < num; i++)
     {
         char *s = va_arg(largs, char *);
-        tlen += strlen(s);
+        tlen += _nlen(s);
     }
 
     va_end(largs);
@@ -112,7 +136,7 @@ int nindex_of(char *s1, char *s2)
 NAGSTR *nto_lower(char *s1)
 {
     NAGSTR *tmp;
-    int len = strlen(s1);
+    int len = _nlen(s1);
     char *raw_str = (char *)malloc(sizeof(char) * len);
     char *ptr = raw_str;
 
@@ -142,7 +166,7 @@ NAGSTR *nto_lower(char *s1)
 NAGSTR *nto_upper(char *s1)
 {
     NAGSTR *tmp;
-    int len = strlen(s1);
+    int len = _nlen(s1);
     char *raw_str = (char *)malloc(sizeof(char) * len);
     char *ptr = raw_str;
 
@@ -172,19 +196,15 @@ NAGSTR *nto_upper(char *s1)
 NAGSTR *ninsert(char s1, char *s2);
 int nlast_index_of(char *s1, char *s2);
 
-int nlength(char *s1)
+inline int nlength(char *s1)
 {
-    int len = 0;
-
-    len = strlen(s1);
-
-    return len;
+    return _nlen(s1);
 }
 
 NAGSTR *nremove(char *s1, int i)
 {
     NAGSTR *result;
-    int len = strlen(s1);
+    int len = _nlen(s1);
     char *raw_str = (char *)malloc(sizeof(char) * len);
     char *ptr = raw_str;
 
@@ -208,8 +228,8 @@ NAGSTR *nsplit(char *s1, char *s2);
 NBOOL nstarts_with(char *s1, char *s2)
 {
     NBOOL result = NFALSE;
-    int len = strlen(s1);
-    int len2 = strlen(s2);
+    int len = _nlen(s1);
+    int len2 = _nlen(s2);
     int count = 0;
     
 
@@ -231,7 +251,7 @@ NAGSTR *nsubstring(char *s1, int si, int ei)
     NAGSTR *sub_str;
     char *raw_str;
 
-    int len = strlen(s1);
+    int len = _nlen(s1);
 
     for (int i=0; i <= si; i++)
         s1++;
