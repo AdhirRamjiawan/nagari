@@ -40,6 +40,23 @@ int _nlen(const char *str)
     return result;
 }
 
+char *_nmalloc(int len)
+{
+    return (char *)malloc(sizeof(char) * len);
+}
+
+void _ncopy(char *s1, char *s2)
+{
+    char *ptr1 = s1;
+    char *ptr2 = s2;
+
+    while(*s2 != '\0')
+        *s1++ = *s2++;
+
+    s1 = ptr1;
+    s2 = ptr2;
+}
+
 NAGSTR *nconcat(char *s1, char *s2)
 {
     NAGSTR *tmp;
@@ -267,7 +284,54 @@ NAGSTR *nsubstring(char *s1, int si, int ei)
     return sub_str;
 }
 
-NAGSTR *ntrim(char *s1);
+/* This requires a much neater implementation*/
+NAGSTR *ntrim(char *s1)
+{
+    NAGSTR *result;
+    char *raw_str;
+    char *ptr_raw;
+    char *ptr;
+    char *ptr_start;
+    char *ptr_end;
+    int len;
+    
+    len = _nlen(s1);
+    ptr = s1;
+
+    raw_str = _nmalloc(len);
+    ptr_raw = raw_str;
+
+    // find the start
+    while (*s1 == ' ') 
+        s1++;
+
+    ptr_start = s1;
+
+    // go to the end
+    while (*s1 != '\0')
+        s1++;
+
+    // move away from '\0'
+    s1--;
+
+    // find the end
+    while (*s1 == ' ')
+        s1--;
+    
+    ptr_end = s1;
+
+    // copy between start to end pointers
+    while (ptr_start <= ptr_end)
+        *raw_str++ = *ptr_start++;
+
+    s1 = ptr;
+    raw_str = '\0';
+    raw_str = ptr_raw;
+
+    result = nstring(raw_str);
+
+    return result;
+}
 
 void ninit()
 {

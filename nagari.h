@@ -40,6 +40,8 @@ void ncleanup();
 
 // EVERY METHOD MUST TREAT STRINGS AS IMMUATABLE
 int _nlen(const char *str);
+char *_nmalloc(int len);
+void _ncopy(char *s1, char *s2);
 NAGSTR *nstring(const char *str);
 NAGSTR *nconcat(char *s1, char *s2);
 NAGSTR *njoin(int num, ...);
