@@ -157,7 +157,7 @@ NAGSTR *nto_lower(char *s1)
     char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
-    strcpy(raw_str, s1);
+    _ncopy(raw_str, s1);
 
     /* if current char is within CAPS
      * range on ascii table then 
@@ -187,7 +187,7 @@ NAGSTR *nto_upper(char *s1)
     char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
-    strcpy(raw_str, s1);
+    _ncopy(raw_str, s1);
 
     /* if current char is within lower char
      * range on ascii table then subtract 
@@ -225,7 +225,7 @@ NAGSTR *nremove(char *s1, int i)
     char *raw_str = _nmalloc(len);
     char *ptr = raw_str;
 
-    strcpy(raw_str, s1);
+    _ncopy(raw_str, s1);
 
     for (int k = 0; k < i - 1; k++)
         raw_str++;
