@@ -181,7 +181,26 @@ int nlength(char *s1)
     return len;
 }
 
-NAGSTR *nremove(char *s1, int i);
+NAGSTR *nremove(char *s1, int i)
+{
+    NAGSTR *result;
+    int len = strlen(s1);
+    char *raw_str = (char *)malloc(sizeof(char) * len);
+    char *ptr = raw_str;
+
+    strcpy(raw_str, s1);
+
+    for (int k = 0; k < i - 1; k++)
+        raw_str++;
+
+    *raw_str = '\0';
+    raw_str = ptr;
+
+    result = nstring(raw_str);
+
+    return result;
+}
+
 NAGSTR *nsplit(char *s1, char *s2);
 
 NBOOL nstarts_with(char *s1, char *s2)

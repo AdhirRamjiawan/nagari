@@ -48,6 +48,8 @@ int main(void)
     printf("lower case of 'HELLO WORld!' is: %s\n", nto_lower("HELLO WORld!")->val);
     printf("upper case of 'hEllO wORld!' is: %s\n", nto_upper("hEllO wORld!")->val);
 
+    printf("remove from index 9 from 'Hello world!': %s \n", nremove("Hello world!", 9)->val);
+
     ncleanup();
     return 0;
 }
