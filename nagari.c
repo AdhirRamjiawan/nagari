@@ -238,7 +238,56 @@ NAGSTR *nremove(char *s1, int i)
     return result;
 }
 
-NAGSTR *nsplit(char *s1, char *s2);
+NAGSTR **nsplit(char *s1, char c)
+{
+	NAGSTR **result;
+	char *tmp;
+	char *ptr = s1;
+	char *ptr_tmp = tmp;
+	int len = _nlen(s1);
+	int part_count = 0;
+	
+	tmp = _nmalloc(len);
+	
+	/* Find number of parts */
+	while (*s1 != '\0')
+	{
+		if (*s1 == c)
+			part_count++;
+		
+		s1++;
+	}
+	
+	/* Reset pointer to the start */
+	s1 = ptr;
+	
+	/* Caller of the this method will need to
+	 * make use of pointer arithmetic to 
+	 * access each part. */
+	*result = (NAGSTR *)malloc(sizeof(NAGSTR) * part_count);
+
+
+	/* Find each part and copy it to a new 
+	 * nstring. */
+	for (int i = 0; i < len; i++)
+	{
+		if (*s1 == c)
+		{
+			*result = nstring(tmp);
+			result++;
+			memset(tmp, '\0', sizeof(char) * len);
+			tmp = ptr_tmp;
+		}
+		
+		*tmp++ = *s1++;
+	}
+	
+	/* Reset result pointer to the start */
+	for (int i = 0; i < part_count; i++)
+		result--;
+	
+	return result;
+}
 
 NBOOL nstarts_with(char *s1, char *s2)
 {

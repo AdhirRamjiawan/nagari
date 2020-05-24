@@ -4,6 +4,7 @@ all: clean
 
 clean:
 	rm -Rf ./build
+	rm -f *.o
 
 test:
 	./build/nagari
