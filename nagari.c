@@ -3,6 +3,9 @@
 
 // EVERY METHOD MUST TREAT STRINGS AS IMMUATABLE
 // EVERY METHOD NEEDS TO BE THREAD SAFE
+// CONSIDER ADDING MORE METADATA INTO THIS STRUCT FOR MEMORY BOUNDS OF STRINGS
+// NEED TO KNOW EXACTLY WHERE STRINGS ARE IN MEMORY.
+// ONLY CLIENT APP SHOULD ADD STRINGS INTO NAGBANK.
 
 NAGSTR *nstring(const char *str)
 {
@@ -238,16 +241,17 @@ NAGSTR *nremove(char *s1, int i)
     return result;
 }
 
-NAGSTR **nsplit(char *s1, char c)
+NAGSTR **nsplit(char *s1, char c, int *count)
 {
 	NAGSTR **result;
 	char *tmp;
 	char *ptr = s1;
-	char *ptr_tmp = tmp;
+	char *ptr_tmp;
 	int len = _nlen(s1);
 	int part_count = 0;
 	
 	tmp = _nmalloc(len);
+	ptr_tmp = tmp;
 	
 	/* Find number of parts */
 	while (*s1 != '\0')
@@ -264,7 +268,7 @@ NAGSTR **nsplit(char *s1, char c)
 	/* Caller of the this method will need to
 	 * make use of pointer arithmetic to 
 	 * access each part. */
-	*result = (NAGSTR *)malloc(sizeof(NAGSTR) * part_count);
+	result = calloc(part_count, sizeof(NAGSTR));
 
 
 	/* Find each part and copy it to a new 
@@ -273,18 +277,33 @@ NAGSTR **nsplit(char *s1, char c)
 	{
 		if (*s1 == c)
 		{
+			*tmp = '\0'; 					/* Mark the end of string. */
+			tmp = ptr_tmp;					/* Reset string pointer back to start. */
 			*result = nstring(tmp);
 			result++;
 			memset(tmp, '\0', sizeof(char) * len);
 			tmp = ptr_tmp;
+			
+			s1++;							/* Move past separator. */
 		}
 		
 		*tmp++ = *s1++;
 	}
 	
+	*tmp = '\0'; 					/* Mark the end of string. */
+	tmp = ptr_tmp;					/* Reset string pointer back to start. */
+	*result = nstring(tmp);
+	memset(tmp, '\0', sizeof(char) * len);
+	tmp = ptr_tmp;
+	
+	s1 = ptr;
+	
 	/* Reset result pointer to the start */
 	for (int i = 0; i < part_count; i++)
 		result--;
+	
+	if (count != NULL)
+		*count = part_count + 1;	/* Honestly: this does not make sense to add 1 here and calloc still allocates 3? why?*/	
 	
 	return result;
 }

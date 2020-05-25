@@ -53,6 +53,18 @@ int main(void)
     printf("The substring from 3 to 7 of 'Hello world!' is: %s\n", nsubstring("Hello world!", 3, 7)->val);
 
     printf("Having '   Hello  ' trimmed is: '%s'\n", ntrim("   Hello  ")->val);
+     
+    int part_count = 0;
+    NAGSTR **parts = nsplit("eggs,banana,milk", ',', &part_count);
+    
+    printf("part count: %d\n", part_count);
+    
+	for (int i = 0; i < part_count; i++)
+	{
+		printf("part : [%s]\n", (*parts)->val);
+		parts++;
+	}
+    
     ncleanup();
     return 0;
 }
